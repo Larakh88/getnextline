@@ -6,7 +6,7 @@
 /*   By: lel-khou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:03:45 by lel-khou          #+#    #+#             */
-/*   Updated: 2022/02/16 15:26:29 by lel-khou         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:39:42 by lel-khou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	*ft_calloc(size_t n, size_t size);
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *str, int c);
 
 #endif
