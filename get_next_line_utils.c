@@ -12,37 +12,17 @@
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t n, size_t size)
-{
-	void	*ptr;
-	size_t	i;
-
-	i = 0;
-	ptr = (void *)malloc(n * size);
-	if (!ptr)
-		return (0);
-	while (i < n)
-	{
-		((unsigned char *)ptr)[i] = 0;
-		i++;
-	}
-	return (ptr);
-}
-
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
 	i = 0;
-	while (!str)
-	{
+	while (str[i] != 0)
 		i++;
-		str++;
-	}
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
@@ -65,35 +45,37 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len;
 	char	*str;
 	size_t	i;
 	size_t	j;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * len + 1);
+	if (!s1)
+	{
+		s1 = (char *)malloc(sizeof(char));
+		s1[0] = 0;
+	}
+	if (!s1)
+		return (0);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (!str)
 		return (0);
 	i = 0;
-	while (i <= ft_strlen(s1))
+	j = 0;
+	while (s1[i] != 0)
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (j <= ft_strlen(s2))
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
+	while (s2[j] != 0)
+		str[i++] = s2[j++];
 	str[i] = 0;
+	free (s1);
 	return (str);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(char *str, int c)
 {
 	int	i;
 
