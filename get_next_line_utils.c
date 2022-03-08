@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+ssize_t	ft_strlen(char *str)
 {
 	size_t	i;
 
@@ -24,26 +24,58 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, ssize_t len)
 {
 	char	*str;
-	size_t	i;
+	ssize_t	i;
 
 	i = 0;
-	if (!s)
+	if (s == 0 || ft_strlen(s) == 0) 
 		return (NULL);
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
+	if (len == 0)
+		len = 1;
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
+	{
+		free (str);
 		return (NULL);
-	while (i < len && s[start] != 0)
+	}
+	while (i < len && s[start] != '\n')
 	{
 		str[i] = s[start];
 		i++;
 		start++;
 	}
-	str[i] = 0;
+	if (s[start] == '\n')
+		str[i++] = '\n';
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_leftstr(char *s, unsigned int start, ssize_t len)
+{
+	char	*str;
+	ssize_t	i;
+
+	i = 0;
+	if (s == 0 || len <= 0)
+	{
+		free (s);
+		return (NULL);
+	}
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	while (i <= len && s[start] != 0)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	str[i] = '\0';
+	free (s);
 	return (str);
 }
 
@@ -58,10 +90,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = (char *)malloc(sizeof(char));
 		s1[0] = 0;
 	}
-	if (!s1 || !s2)
-		return (NULL);
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
-	if (!str)
+	if (!str || !s1)
 		return (NULL);
 	i = 0;
 	j = 0;

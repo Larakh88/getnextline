@@ -16,9 +16,10 @@
 #include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(char *str);
-char	*ft_substr(char *s, unsigned int start, size_t len);
+ssize_t	ft_strlen(char *str);
+char	*ft_substr(char *s, unsigned int start, ssize_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *str, int c);
+char    *ft_leftstr(char *s, unsigned int start, ssize_t len);
 
 #endif
