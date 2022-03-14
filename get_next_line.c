@@ -6,7 +6,7 @@
 /*   By: lel-khou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:03:32 by lel-khou          #+#    #+#             */
-/*   Updated: 2022/02/16 11:44:31 by lel-khou         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:16:49 by lel-khou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	*ft_read(int fd, char *readline)
 	buff = malloc (sizeof(char) * BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	while (byte != 0)
+	while (byte != 0 && !ft_strchr(readline, '\n'))
 	{
 		byte = read(fd, buff, BUFFER_SIZE);
 		if (byte == -1)
-			break;
+			break ;
 		buff[byte] = '\0';
 		readline = ft_strjoin(readline, buff);
 		if (!readline)
@@ -33,8 +33,6 @@ char	*ft_read(int fd, char *readline)
 			free (buff);
 			return (NULL);
 		}
-		if (ft_strchr(readline, '\n'))
-			break;
 	}
 	free (buff);
 	return (readline);

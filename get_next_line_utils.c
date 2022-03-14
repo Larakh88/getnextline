@@ -6,7 +6,7 @@
 /*   By: lel-khou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:03:57 by lel-khou          #+#    #+#             */
-/*   Updated: 2022/02/17 12:00:15 by lel-khou         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:41:39 by lel-khou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ char	*ft_substr(char *s, unsigned int start, ssize_t len)
 	ssize_t	i;
 
 	i = 0;
-	if (s == 0 || ft_strlen(s) == 0) 
+	if (s == 0 || ft_strlen(s) == 0)
 		return (NULL);
-	if (len == 0)
+	if (len == 0 && s[i] == '\n')
 		len = 1;
-	str = malloc(sizeof(char) * len + 1);
+	str = malloc(sizeof(char) * len + 2);
 	if (!str)
 	{
 		free (str);
